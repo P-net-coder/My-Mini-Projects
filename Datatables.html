@@ -3,17 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataTables Example</title>
+    <title>DataTable</title>
 
     <!-- jQuery (Must be loaded first) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Correct DataTables CSS & JS -->
+    <!-- DataTables Core CSS & JS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <!-- Bootstrap 5 DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTables Buttons Plugin -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+    <style>
+        /* Table header color */
+        thead {
+            background-color: #090fa7; /* Orange-Red */
+            color: white;
+        }
+
+        /* Alternate row colors */
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2; /*Choose color*/
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #d9edf7; /*Choose color  */
+        }
+
+        /* Hover effect */
+        tbody tr:hover {
+            background-color: #6aa5f7 !important; /*Choose color*/
+        }
+
+        /* Style DataTables wrapper */
+        .dataTables_wrapper {
+            font-family: Arial, sans-serif;
+            background-color: #fcfefe; /*Choose color*/
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(243, 245, 246, 0.975);
+        }
+
+        /* Style buttons */
+        .dt-buttons {
+            margin-bottom: 10px;
+        }
+
+        /* Style search input */
+        .dataTables_filter label {
+            font-weight: bold;
+        }
+
+        /* Custom Search Box */
+        .dataTables_filter input {
+            border: 2px solid #2a37ad;
+            padding: 5px;
+            border-radius: 5px;
+            background: url('https://cdn-icons-png.flaticon.com/512/482/482631.png') no-repeat right;
+            background-size: 20px;
+            padding-right: 30px;
+        }
+    </style>
 </head>
 <body>
-    <table id="example" class="display" style="width:100%">
+
+    <div class="container mt-4">
+        <h2>DataTable</h2>
+        <table id="example" class="table table-striped display" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -493,12 +560,21 @@
             </tr>
         </tfoot>
     </table>
+</div>
 
-<script>
-  
-$(document).ready(function(){
-    $('#example').DataTable(); //Intialize DataTables
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                dom: 'Bfrtip', // Add export buttons
+                buttons: ['copy', 'csv', 'pdf', 'print'], // Export options
+                "pagingType": "full_numbers", // Pagination style
+                "lengthMenu": [5, 10, 25, 50], // Page length options
+                "language": {
+                    "search": "🔍 Search: " // Custom search text
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
